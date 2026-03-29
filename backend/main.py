@@ -88,9 +88,9 @@ async def log_requests(request: Request, call_next):
 #  Routes
 # ══════════════════════════════════════════════
 
-app.include_router(resume_router)
-app.include_router(jobs_router)
-app.include_router(ranking_router)
+app.include_router(resume_router, prefix="/api")
+app.include_router(jobs_router, prefix="/api")
+app.include_router(ranking_router, prefix="/api")
 
 
 @app.get("/", tags=["Health"])
