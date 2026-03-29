@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: job-finder-api
+    runtime: python
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: FRONTEND_URL
+        value: https://your-app.vercel.app   # replace after Vercel deploy
+      - key: HF_API_TOKEN
+        sync: false
+      - key: HF_MODEL
+        value: meta-llama/Llama-3.1-8B-Instruct
+      - key: HF_API_URL
+        value: https://router.huggingface.co/v1
+      - key: LLM_PROVIDER
+        value: huggingface
+      - key: ADZUNA_APP_ID
+        sync: false
+      - key: ADZUNA_APP_KEY
+        sync: false
+      - key: ADZUNA_COUNTRY
+        value: in
+      - key: MONGODB_URI
+        sync: false                           # set to MongoDB Atlas URI
+      - key: MONGODB_DB
+        value: resume_job_finder
+      - key: REDIS_URL
+        sync: false                           # optional: Upstash Redis URL
+      - key: UPLOAD_DIR
+        value: /tmp/uploads
+      - key: MAX_UPLOAD_SIZE_MB
+        value: "10"
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "30"
